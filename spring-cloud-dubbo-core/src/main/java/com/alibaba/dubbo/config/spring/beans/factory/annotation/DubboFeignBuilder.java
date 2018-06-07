@@ -12,7 +12,10 @@ public class DubboFeignBuilder extends Feign.Builder {
     private ApplicationContext applicationContext;
 
     public Reference defaultReference;
-    final class DefaultReferenceClass{ @Reference String field;};
+    final class DefaultReferenceClass{
+        // dubbo早与eureka启动 check设为false 调用时检查
+        @Reference(check = false) String field;
+    }
 
     public DubboFeignBuilder() {
         // 产生@Reference 默认配置实例

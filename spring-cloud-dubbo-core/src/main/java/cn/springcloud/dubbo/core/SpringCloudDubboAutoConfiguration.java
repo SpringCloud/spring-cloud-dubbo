@@ -2,7 +2,8 @@ package cn.springcloud.dubbo.core;
 
 import com.alibaba.dubbo.config.AbstractConfig;
 import com.alibaba.dubbo.config.spring.beans.factory.annotation.FeignClientToDubboProviderBeanPostProcessor;
-import com.alibaba.dubbo.config.spring.beans.factory.annotation.ServiceAnnotationBeanPostProcessor;
+import com.alibaba.dubbo.config.spring.beans.factory.annotation.DubboFeignBuilder;
+import feign.Feign;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
@@ -27,5 +28,10 @@ public class SpringCloudDubboAutoConfiguration {
     public FeignClientToDubboProviderBeanPostProcessor feignClientToDubboProviderBeanPostProcessor(Environment environment) {
         Set<String> packagesToScan = environment.getProperty(BASE_PACKAGES_PROPERTY_NAME, Set.class, emptySet());
         return new FeignClientToDubboProviderBeanPostProcessor(packagesToScan);
+    }
+
+    @Bean
+    public Feign.Builder feignDubboBuilder() {
+        return new DubboFeignBuilder();
     }
 }

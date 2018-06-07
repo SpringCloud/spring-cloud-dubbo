@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestService {
 
-//    @Autowired
-    @Reference
+    @Autowired
+//    @Reference
     private ProviderService providerService;
 
     @GetMapping("/test")

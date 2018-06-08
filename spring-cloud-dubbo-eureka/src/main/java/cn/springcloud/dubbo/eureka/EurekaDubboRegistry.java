@@ -1,31 +1,37 @@
-package cn.springcloud.dubbo.core.registry;
+package cn.springcloud.dubbo.eureka;
 
-import cn.springcloud.dubbo.core.SpringCloudDubboAutoConfiguration;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.registry.NotifyListener;
 import com.alibaba.dubbo.registry.support.FailbackRegistry;
+import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.EurekaEvent;
+import com.netflix.discovery.EurekaEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EurekaDubboRegistry extends FailbackRegistry {
-    private EurekaClient eurekaClient = null;
+    private static final Logger logger = LoggerFactory.getLogger(EurekaDubboRegistry.class);
 
+    private EurekaClient eurekaClient = null;
     // FIXME dubbo早于eurekaClient初始化 暂时采用异步队列处理
     int waitCount = 0;
     private ConcurrentLinkedQueue<Event> eventQueue = new ConcurrentLinkedQueue<>();
-    private Thread eventQueueThread = new Thread() {
+    private Thread eventQueueThread = new Thread("EurekaDubboRegistry.eventQueueThread") {
         @Override
         public void run() {
-            while (waitCount < 10) {
+            while (waitCount < 10 && eventQueue.isEmpty()) {
                 if (eurekaClient == null) {
                     try {
-                        eurekaClient = SpringCloudDubboAutoConfiguration.applicationContext.getBean(EurekaClient.class);
+                        eurekaClient = EurekaDubboRegistryAutoConfiguration.getApplicationContext().getBean(EurekaClient.class);
+                        eurekaClient.getApplications("");
                     } catch (Exception e) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e1) {
-                            e1.printStackTrace();
                         }
                     }
                     continue;
@@ -35,16 +41,15 @@ public class EurekaDubboRegistry extends FailbackRegistry {
                 if (event == null) {
                     waitCount += 1;
                     try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
                     }
-                }else{
+                } else {
                     waitCount = 0;
-                    System.out.println("处理队列 "+event);
+                    doEvent(event);
                 }
             }
-            System.out.println("eventQueueThread完成=============================================");
+            logger.info("==========eventQueueThread done==========");
         }
     };
 
@@ -56,11 +61,6 @@ public class EurekaDubboRegistry extends FailbackRegistry {
     @Override
     protected void doRegister(URL url) {
         doEvent(new Event(Event.REGISTER, url, null));
-//        InstanceInfo instanceInfo = eurekaClient.getApplicationInfoManager().getInfo();
-//        Map<String, String> metadata = instanceInfo.getMetadata();
-//        metadata.put("dubbo", url.toString());
-//
-//        eurekaClient.getApplicationInfoManager().registerAppMetadata(metadata);
     }
 
     @Override
@@ -82,18 +82,32 @@ public class EurekaDubboRegistry extends FailbackRegistry {
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return true;
     }
 
     private void doEvent(Event event) {
         if (eurekaClient == null) {
             eventQueue.add(event);
-        }else{
-            System.out.println("自己处理 "+event);
+        } else {
+            if (event.type == Event.REGISTER) {
+                InstanceInfo instanceInfo = eurekaClient.getApplicationInfoManager().getInfo();
+                Map<String, String> metadata = instanceInfo.getMetadata();
+                metadata.put("dubbo", event.url.toString());
+                eurekaClient.getApplicationInfoManager().registerAppMetadata(metadata);
+            } else if (event.type == Event.UNREGISTER) {
+                InstanceInfo instanceInfo = eurekaClient.getApplicationInfoManager().getInfo();
+                Map<String, String> metadata = instanceInfo.getMetadata();
+                metadata.remove("dubbo");
+                eurekaClient.getApplicationInfoManager().registerAppMetadata(metadata);
+            } else if (event.type == Event.SUBSCRIBE) {
+
+            } else if (event.type == Event.UNSUBSCRIBE) {
+
+            }
         }
     }
 
-    public class Event {
+    class Event {
         public static final int REGISTER = 0;
         public static final int UNREGISTER = 1;
         public static final int SUBSCRIBE = 2;

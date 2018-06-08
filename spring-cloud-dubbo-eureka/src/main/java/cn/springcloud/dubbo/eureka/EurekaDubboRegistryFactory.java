@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.springcloud.dubbo.core.registry;
+package cn.springcloud.dubbo.eureka;
 
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.registry.Registry;

@@ -4,12 +4,9 @@ import com.alibaba.dubbo.config.AbstractConfig;
 import com.alibaba.dubbo.config.spring.beans.factory.annotation.DubboFeignBuilder;
 import com.alibaba.dubbo.config.spring.beans.factory.annotation.FeignClientToDubboProviderBeanPostProcessor;
 import feign.Feign;
-import org.springframework.beans.BeansException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -23,14 +20,7 @@ import static java.util.Collections.emptySet;
 @Configuration
 @ConditionalOnProperty(prefix = DUBBO_PREFIX, name = "enabled", matchIfMissing = true, havingValue = "true")
 @ConditionalOnClass(AbstractConfig.class)
-public class SpringCloudDubboAutoConfiguration implements ApplicationContextAware {
-    public static ApplicationContext applicationContext;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringCloudDubboAutoConfiguration.applicationContext = applicationContext;
-    }
-
+public class SpringCloudDubboAutoConfiguration {
     @ConditionalOnProperty(name = BASE_PACKAGES_PROPERTY_NAME)
     @ConditionalOnClass(ConfigurationPropertySources.class)
     @Bean

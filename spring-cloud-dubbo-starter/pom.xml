@@ -43,6 +43,11 @@
             <groupId>cn.springcloud.dubbo</groupId>
             <artifactId>spring-cloud-dubbo-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.springcloud.dubbo</groupId>
+            <artifactId>spring-cloud-dubbo-eureka</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

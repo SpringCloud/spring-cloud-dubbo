@@ -47,6 +47,12 @@
 
             <dependency>
                 <groupId>cn.springcloud.dubbo</groupId>
+                <artifactId>spring-cloud-dubbo-eureka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.springcloud.dubbo</groupId>
                 <artifactId>spring-cloud-dubbo-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>

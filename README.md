@@ -3,6 +3,8 @@ spring/spring cloud的设计理念是integrate everything。充分利用现有�
 
 本项目的目标是将dubbo融入到spring cloud生态中，使微服务之间的调用同时具备restful和dubbo调用的能力。做到对业务代码无侵入，无感知：引入jar包则微服务间调用使用dubbo，去掉jar包则使用默认的restful。
 
+> 如果你觉得spring-cloud-dubbo不错，让你很爽，烦请拨冗**“Star”**。
+
 ## 设计思路
 之前因为工作需要增强过feign，feign的设计思路就是提供一套API，底层契约随意更换，参照feign的SpringMvcContract类。与项目理念非常相似，所以我们也使用feign作为统一接口，spring cloud下feign默认使用restful方式调用，我们只需要扩展feign，提供dubbo方式调用就行了。
 

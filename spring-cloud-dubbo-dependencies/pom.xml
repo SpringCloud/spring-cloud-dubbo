@@ -10,8 +10,8 @@
 
     <properties>
         <spring.boot.version>2.0.1.RELEASE</spring.boot.version>
-        <spring.cloud.version>Finchley.RC2</spring.cloud.version>
-        <dubbo-spring-boot-starter.version>0.2.0-SNAPSHOT</dubbo-spring-boot-starter.version>
+        <spring.cloud.version>Finchley.RELEASE</spring.cloud.version>
+        <dubbo-spring-boot-starter.version>0.2.0</dubbo-spring-boot-starter.version>
         <dubbo.version>2.6.2</dubbo.version>
     </properties>
 

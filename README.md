@@ -82,7 +82,7 @@ public <T> T target(Target<T> target) {
     <artifactId>spring-cloud-dubbo-starter</artifactId>
 </dependency>
 ```
-使用 https://github.com/apache/incubator-dubbo-spring-boot-project 0.2.0版本，目前还未发布maven中央仓库，需要本地编译安装，spring-boot与dubbo集成和配置均安装此项目说明文档
+使用 https://github.com/apache/incubator-dubbo-spring-boot-project 0.2.0版本，spring-boot与dubbo集成和配置均安装此项目说明文档
 
 服务提供方配置：
 ```

@@ -1,3 +1,7 @@
+# IntelliJ, based on http://devnet.jetbrains.net/docs/DOC-1186
+.idea/
+*.iml
+
 # Compiled class file
 *.class
 
@@ -7,8 +11,6 @@
 # BlueJ files
 *.ctxt
 
-#Intellij idea files
-*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

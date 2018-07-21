@@ -11,6 +11,10 @@
 
     <artifactId>spring-cloud-dubbo-starter</artifactId>
 
+    <name>spring-cloud-dubbo-starter</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo integrated dubbo into spring cloud project</description>
+
     <dependencies>
         <!-- spring -->
         <dependency>

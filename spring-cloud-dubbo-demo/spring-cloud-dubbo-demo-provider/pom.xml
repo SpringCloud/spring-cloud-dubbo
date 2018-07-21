@@ -12,6 +12,10 @@
     <artifactId>spring-cloud-dubbo-demo-provider</artifactId>
     <packaging>pom</packaging>
 
+    <name>spring-cloud-dubbo-demo-provider</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo-demo-provider is a service provider in this sample</description>
+
     <modules>
         <module>spring-cloud-dubbo-demo-provider-service</module>
         <module>spring-cloud-dubbo-demo-provider-api</module>

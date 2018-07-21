@@ -11,6 +11,10 @@
 
     <artifactId>spring-cloud-dubbo-demo-eureka</artifactId>
 
+    <name>spring-cloud-dubbo-demo-eureka</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo-demo-eureka is a registry in this sample</description>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

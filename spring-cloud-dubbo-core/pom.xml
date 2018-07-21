@@ -11,6 +11,10 @@
 
     <artifactId>spring-cloud-dubbo-core</artifactId>
 
+    <name>spring-cloud-dubbo-core</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo integrated dubbo into spring cloud project</description>
+
     <dependencies>
         <dependency>
             <groupId>com.alibaba.boot</groupId>

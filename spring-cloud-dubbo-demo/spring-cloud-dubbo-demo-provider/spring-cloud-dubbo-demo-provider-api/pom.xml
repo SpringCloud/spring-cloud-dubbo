@@ -11,6 +11,10 @@
 
     <artifactId>spring-cloud-dubbo-demo-provider-api</artifactId>
 
+    <name>spring-cloud-dubbo-demo-provider-api</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo-demo-provider is a service provider in this sample</description>
+
     <dependencies>
         <dependency>
             <groupId>cn.springcloud.dubbo</groupId>

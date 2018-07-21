@@ -11,6 +11,11 @@
 
     <artifactId>spring-cloud-dubbo-demo-consumer</artifactId>
     <packaging>pom</packaging>
+
+    <name>spring-cloud-dubbo-demo-consumer</name>
+    <url>http://springcloud.cn</url>
+    <description>spring-cloud-dubbo-demo-consumer is a consumer in this sample</description>
+
     <modules>
         <module>spring-cloud-dubbo-demo-consumer-service</module>
     </modules>

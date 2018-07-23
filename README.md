@@ -3,6 +3,15 @@ spring/spring cloud的设计理念是integrate everything。充分利用现有�
 
 本项目的目标是将dubbo融入到spring cloud生态中，使微服务之间的调用同时具备restful和dubbo调用的能力。做到对业务代码无侵入，无感知：引入jar包则微服务间调用使用dubbo，去掉jar包则使用默认的restful。
 
+目前已发布1.0.0版本到Maven中央仓库
+```xml
+<dependency>
+    <groupId>cn.springcloud.dubbo</groupId>
+    <artifactId>spring-cloud-dubbo-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+
+```
 > 如果你觉得spring-cloud-dubbo不错，让你很爽，烦请拨冗**“Star”**。
 
 ## 设计思路
